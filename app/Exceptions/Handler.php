@@ -2,11 +2,15 @@
 
 namespace App\Exceptions;
 
+use App\Traits\ApiResponseTrait;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 class Handler extends ExceptionHandler
 {
+    use ApiResponseTrait;
     /**
      * A list of exception types with their corresponding custom log levels.
      *
@@ -46,5 +50,15 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, \Exception $exception)
+    {
+        if ($exception instanceof TokenInvalidException) {
+            return $this->failureResponse(\Response);
+        } elseif ($exception instanceof TokenExpiredException) {
+            return $this->failureResponse(401);
+        }
+        return parent::render($request, $exception);
     }
 }
