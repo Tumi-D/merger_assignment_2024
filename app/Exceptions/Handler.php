@@ -52,13 +52,4 @@ class Handler extends ExceptionHandler
         });
     }
 
-    public function render($request, \Exception $exception)
-    {
-        if ($exception instanceof TokenInvalidException) {
-            return $this->failureResponse(\Response);
-        } elseif ($exception instanceof TokenExpiredException) {
-            return $this->failureResponse(401);
-        }
-        return parent::render($request, $exception);
-    }
 }
