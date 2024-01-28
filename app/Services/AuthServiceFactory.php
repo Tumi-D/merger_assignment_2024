@@ -11,6 +11,13 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthServiceFactory
 {
+     /**
+     * Determine authentication servicee from company name
+     *
+     * @param string $company
+     * @return mixed
+     * @throws \Exception
+     */
     public static function createAuthService($company)
     {
         switch ($company) {
@@ -25,6 +32,15 @@ class AuthServiceFactory
         }
     }
 
+
+    /**
+     * Determine authentication servicee from company name
+     *
+     * @param string $company
+     * @param string $password
+     * @return boolean
+     * @throws \Exception
+     */
     public static function authenticate($login, $password)
     {
         $company = self::determineCompany($login);
@@ -48,6 +64,13 @@ class AuthServiceFactory
     }
 
 
+    /**
+     * Determine company from login id
+     *
+     * @param string $login
+     * @return string
+     * @throws \Exception
+     */
     public static function determineCompany($login)
     {
         $matches = [];
@@ -60,6 +83,13 @@ class AuthServiceFactory
         throw new \Exception('Invalid company');
     }
 
+     /**
+     * Login the user with the given username and password and return the JWT token
+     * @param string $login
+     * @param string $password
+     * @return string
+     * @throws \Exception
+     */
     public static function login($login, $password)
     {
         $results = self::authenticate($login, $password);
