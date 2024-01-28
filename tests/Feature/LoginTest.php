@@ -41,7 +41,7 @@ class LoginTest extends TestCase
      *
      * @return void
      */
-    public function test_login_failed_successfully()
+    public function test_login_failed()
     {
         $login = [
             0 => [
