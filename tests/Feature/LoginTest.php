@@ -2,8 +2,6 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class LoginTest extends TestCase
@@ -17,15 +15,15 @@ class LoginTest extends TestCase
     {
         $login = [
             0 => [
-                "login" => "BAR_1",
+                "login" => "BAR_123",
                 "password" => "foo-bar-baz"
             ],
             1 => [
-                "login" => "FOO_1",
+                "login" => "FOO_123",
                 "password" => "foo-bar-baz"
             ],
             2 => [
-                "login" => "BAZ_1",
+                "login" => "BAZ_123",
                 "password" => "foo-bar-baz"
             ],
         ];
